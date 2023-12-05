@@ -37,6 +37,7 @@ public class EmpresaRequest {
                 .email(email)
                 .senha(senha)
                 .cnpj(cnpj)
+                .site(site)
                 .build();
     }
 }
