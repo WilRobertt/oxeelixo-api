@@ -1,4 +1,4 @@
-package br.com.ifpe.oxeelixo.modelo.usuario;
+package br.com.ifpe.oxeelixo.modelo.empresa;
 
 import java.time.LocalDate;
 
@@ -17,26 +17,31 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "Usuario")
+@Table
 @Where(clause = "habilitado = true")
 @Builder
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Usuario extends EntidadeAuditavel {
+public class Empresa extends EntidadeAuditavel {
 
-   @Column
-   private String nome;
+    @Column
+    private String nomeEmpresa;
 
-   @Column
-   private String email;
+    @Column
+    private String email;
 
-   @Column
-   private String senha;
+    @Column
+    private String senha;
 
-   @Column
-   @JsonFormat(pattern = "dd/MM/yyyy")
-   private LocalDate dataNascimento;
+    @Column
+    private String cnpj;
 
+    @Column
+    private String site;
+
+    @Column
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate dataFundacao;
 }
