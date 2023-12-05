@@ -4,9 +4,9 @@ services:
     image: postgres:9.6
     restart: always
     environment:
-      POSTGRES_PASSWORD: oxefood
-      POSTGRES_DB: oxefood
+      POSTGRES_PASSWORD: oxeelixo
+      POSTGRES_DB: oxeelixo
     ports:
-      - 5435:5432
+      - 5437:5432
     volumes:
       - ./postgres-data:/bitnami/postgresql/data
