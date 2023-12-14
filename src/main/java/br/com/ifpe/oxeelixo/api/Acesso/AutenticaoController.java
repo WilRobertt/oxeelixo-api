@@ -1,4 +1,4 @@
-package br.com.ifpe.oxeelixo.api.acesso;
+package br.com.ifpe.oxeelixo.api.Acesso;
 
 import java.util.HashMap;
 import java.util.Map;
