@@ -26,6 +26,10 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Empresa extends EntidadeAuditavel {
 
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Autenticacao autenticacao;
+
     @Column
     private String nomeEmpresa;
 

@@ -7,20 +7,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.ifpe.oxeelixo.modelo.acesso.Autenticacao;
+import br.com.ifpe.oxeelixo.modelo.acesso.AutenticacaoService;
+
 @Service
 public class UsuarioService {
+    
+    @Autowired
+    private AutenticacaoService autenticacaoService;
 
     @Autowired
     private UsuarioRepository repository;
 
+    @Autowired
+    private EmailService emailService;
+
+
     @Transactional
     public Usuario save(Usuario usuario) {
+        
+        AutenticacaoService.save(usuario.getUsuario());
+
 
         usuario.setHabilitado(Boolean.TRUE);
         usuario.setVersao(1L);
         usuario.setDataCriacao(LocalDate.now());
-        return repository.save(usuario);
+        Usuario usuarioSalvo=repository.save(usuario);
     }
+
+    //emailService.enviarEmailConfirmacaoCadastroUsuario(usuarioSalvo);
+
 
     public List<Usuario> findAll() {
 

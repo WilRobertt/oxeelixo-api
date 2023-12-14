@@ -40,4 +40,12 @@ public class EmpresaRequest {
                 .site(site)
                 .build();
     }
+    public Autenticacao buildAutenticacao() {
+	
+        return Autenticacao.builder()
+           .username(email)
+           .password(password)
+           .roles(Arrays.asList(Usuario.ROLE_CLIENTE))
+           .build();
+         }
 }

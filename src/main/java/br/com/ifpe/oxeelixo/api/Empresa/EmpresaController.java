@@ -31,11 +31,20 @@ public class EmpresaController {
     // sistema.")
     @PostMapping
     public ResponseEntity<Empresa> save(@RequestBody @Valid EmpresaRequest request) {
-
-        Empresa empresa = empresaService.save(request.build());
-        return new ResponseEntity<Empresa>(empresa, HttpStatus.CREATED);
-    }
-
+        Empresa empresa = request.buildEmpresa();
+	
+        if (request.getPerfil() != null && !"".equals(request.getPerfil())) {
+            if (request.getPerfil().equals("Autenticacao")) {
+            empresa.getAutenticacao().getRoles().add(Autenticacao.ROLE_EMPRESA_USER);
+            } else if (request.getPerfil().equals("Admin")) {
+            empresa.getAutenticacao().getRoles().add(Autenticacao.ROLE_EMPRESA);
+            }
+        }
+        
+        Empresa empresaCriada = empresaService.save(empresa);
+        return new ResponseEntity<Empresa>(empresaCriada, HttpStatus.CREATED);
+        }
+    
     // @ApiOperation(value = "Serviço responsável por listar todos os usuários do
     // sistema.")
     @GetMapping
