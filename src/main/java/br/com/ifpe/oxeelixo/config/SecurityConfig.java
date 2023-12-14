@@ -17,6 +17,8 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import br.com.ifpe.oxeelixo.modelo.acesso.Autenticacao;
+
+import static org.springframework.security.config.Customizer.withDefaults;
 import br.com.ifpe.oxeelixo.modelo.acesso.AutenticacaoService;
 import br.com.ifpe.oxeelixo.seguranca.jwt.JwtAuthenticationEntryPoint;
 import br.com.ifpe.oxeelixo.seguranca.jwt.JwtTokenAuthenticationFilter;
@@ -60,25 +62,25 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        http    
-                .authorizeHttpRequests((authorize) -> authorize
-                .httpBasic().disable().csrf().disable().cors().and().sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().exceptionHandling()
-                .authenticationEntryPoint(authenticationEntryPoint).and().authorizeRequests()
+        http
+                .httpBasic(basic -> basic.disable()).csrf(csrf -> csrf.disable()).cors(withDefaults()).sessionManagement(management -> management
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)).exceptionHandling(handling -> handling
+                .authenticationEntryPoint(authenticationEntryPoint)).authorizeHttpRequests(requests -> requests
 
-                .antMatchers(AUTH_WHITELIST).permitAll()
-                
-                .antMatchers(HttpMethod.POST, "/api/usuario").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/login").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/empresa").permitAll()
+                .requestMatchers(AUTH_WHITELIST).permitAll()
 
-                
+                .requestMatchers(HttpMethod.POST, "/api/usuario").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/login").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/empresa").permitAll()
+
+
+
 
                 .anyRequest()
                 .hasAnyAuthority(Autenticacao.ROLE_USUARIO, Autenticacao.ROLE_EMPRESA, Autenticacao.ROLE_USUARIO)
                 .and().addFilterBefore(
-                        new JwtTokenAuthenticationFilter(jwtTokenProvider),
-                        UsernamePasswordAuthenticationFilter.class));
+                new JwtTokenAuthenticationFilter(jwtTokenProvider),
+                UsernamePasswordAuthenticationFilter.class));
                 
         return http.build();
     }
