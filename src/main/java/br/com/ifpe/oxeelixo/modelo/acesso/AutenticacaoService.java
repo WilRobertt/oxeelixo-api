@@ -1,9 +1,12 @@
 package br.com.ifpe.oxeelixo.modelo.acesso;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
-import br.com.ifpe.oxeelixo.modelo.acesso.Autenticacao;
-import br.com.ifpe.oxeelixo.modelo.acesso.AutenticacaoRepository;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class AutenticacaoService implements UserDetailsService {

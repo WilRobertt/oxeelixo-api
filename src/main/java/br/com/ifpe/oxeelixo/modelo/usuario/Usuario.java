@@ -2,12 +2,11 @@ package br.com.ifpe.oxeelixo.modelo.usuario;
 
 import java.time.LocalDate;
 
-import org.hibernate.annotations.FetchMode;
-
 import org.hibernate.annotations.Where;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import br.com.ifpe.oxeelixo.modelo.acesso.Autenticacao;
 import br.com.ifpe.oxeelixo.util.entity.EntidadeAuditavel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,7 +31,7 @@ public class Usuario extends EntidadeAuditavel {
 
    @ManyToOne
    @JoinColumn(nullable = false)
-   private Usuario usuario;
+   private Autenticacao autenticacao;
 
    @Column
    private String nome;

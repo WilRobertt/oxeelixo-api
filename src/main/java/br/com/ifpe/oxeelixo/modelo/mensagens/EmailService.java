@@ -14,13 +14,11 @@ import org.thymeleaf.context.Context;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
+import br.com.ifpe.oxeelixo.modelo.usuario.Usuario;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 
-/**
- * @author Roberto Alencar
- */
 @Component
 public class EmailService {
 
@@ -44,14 +42,14 @@ public class EmailService {
 
     private JavaMailSender emailSender;
 
-    public void enviarEmailConfirmacaoCadastroCliente(Cliente cliente) {
+    public void enviarEmailConfirmacaoCadastroususuario(Usuario usuario) {
 
         String assuntoEmail = "Bem vindo ao nosso aplicativo";
 
         Context params = new Context();
-        params.setVariable("cliente", cliente);
+        params.setVariable("usuario",usuario);
 
-        this.sendMailTemplate("bem_vindo_cliente.html", cliente.getUsuario().getUsername(), assuntoEmail, params);
+        this.sendMailTemplate("bem_vindo_usuario.html",usuario.getAutenticacao().getUsername(), assuntoEmail, params);
     }
 
     @Async

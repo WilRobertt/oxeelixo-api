@@ -1,9 +1,11 @@
 package br.com.ifpe.oxeelixo.api.Empresa;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import br.com.ifpe.oxeelixo.modelo.acesso.Autenticacao;
 import br.com.ifpe.oxeelixo.modelo.empresa.Empresa;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,7 +31,9 @@ public class EmpresaRequest {
 
     private String site;
 
-    public Empresa build() {
+    private String password;
+
+    public Empresa buildEmpresa() {
 
         return Empresa.builder()
                 .nomeEmpresa(nomeEmpresa)
@@ -45,7 +49,7 @@ public class EmpresaRequest {
         return Autenticacao.builder()
            .username(email)
            .password(password)
-           .roles(Arrays.asList(Usuario.ROLE_CLIENTE))
+           .roles(Arrays.asList(Autenticacao.ROLE_USUARIO))
            .build();
          }
 }

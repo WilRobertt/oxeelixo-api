@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.ifpe.oxeelixo.modelo.acesso.Autenticacao;
 import br.com.ifpe.oxeelixo.modelo.acesso.AutenticacaoService;
+import br.com.ifpe.oxeelixo.modelo.mensagens.EmailService;
 
 @Service
 public class UsuarioService {
@@ -26,13 +26,14 @@ public class UsuarioService {
     @Transactional
     public Usuario save(Usuario usuario) {
         
-        AutenticacaoService.save(usuario.getUsuario());
-
+        autenticacaoService.save(usuario.getAutenticacao());
 
         usuario.setHabilitado(Boolean.TRUE);
         usuario.setVersao(1L);
         usuario.setDataCriacao(LocalDate.now());
         Usuario usuarioSalvo=repository.save(usuario);
+
+        return usuarioSalvo;
     }
 
     //emailService.enviarEmailConfirmacaoCadastroUsuario(usuarioSalvo);

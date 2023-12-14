@@ -1,4 +1,4 @@
-package br.com.ifpe.oxefood.seguranca.jwt;
+package br.com.ifpe.oxeelixo.seguranca.jwt;
 
 import org.springframework.security.core.AuthenticationException;
 

@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.ifpe.oxeelixo.modelo.acesso.AutenticacaoService;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -14,13 +15,20 @@ public class EmpresaService {
     @Autowired
     private EmpresaRepository repository;
 
+    @Autowired
+    private AutenticacaoService autenticacaoService;
+
     @Transactional
     public Empresa save(Empresa empresa) {
+
+        autenticacaoService.save(empresa.getAutenticacao());
 
         empresa.setHabilitado(Boolean.TRUE);
         empresa.setVersao(1L);
         empresa.setDataCriacao(LocalDate.now());
-        return repository.save(empresa);
+        Empresa empresaSalva=repository.save(empresa);
+
+        return empresaSalva;
     }
 
     public List<Empresa> findAll() {

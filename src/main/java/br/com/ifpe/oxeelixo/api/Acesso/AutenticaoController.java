@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.ifpe.oxefood.modelo.acesso.Autenticacao;
-import br.com.ifpe.oxefood.modelo.acesso.AutenticacaoService;
-import br.com.ifpe.oxefood.seguranca.jwt.JwtTokenProvider;
+import br.com.ifpe.oxeelixo.modelo.acesso.Autenticacao;
+import br.com.ifpe.oxeelixo.modelo.acesso.AutenticacaoService;
+import br.com.ifpe.oxeelixo.seguranca.jwt.JwtTokenProvider;
 
 
 @RestController
@@ -34,7 +34,7 @@ public class AutenticaoController {
     private JwtTokenProvider jwtTokenProvider;
 
     @PostMapping
-    public Map<Object, Object> signin(@RequestBody AuthenticationRequest data) {
+    public Map<Object, Object> signin(@RequestBody AutenticacaoRequest data) {
 
         try {
 
@@ -46,7 +46,7 @@ public class AutenticaoController {
             String refreshToken = jwtTokenProvider.createRefreshToken(autenticacao.getUsername());
 
             Map<Object, Object> model = new HashMap<>();
-            model.put("username", Autenticacao.getUsername());
+            model.put("username", autenticacao.getUsername());
             model.put("token", token);
             model.put("refresh", refreshToken);
 

@@ -1,11 +1,13 @@
 package br.com.ifpe.oxeelixo.api.Usuario;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.ifpe.oxeelixo.modelo.acesso.Autenticacao;
 import br.com.ifpe.oxeelixo.modelo.usuario.Usuario;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,7 +35,7 @@ public class UsuarioRequest {
    public Usuario build() {
 
       return Usuario.builder()
-            .autenticacao(buildAutenticao())
+            .autenticacao(buildAutenticacao())
             .nome(nome)
             .dataNascimento(dataNascimento)
             .email(email)
@@ -45,7 +47,7 @@ public class UsuarioRequest {
       return Autenticacao.builder()
          .username(email)
          .password(password)
-         .roles(Arrays.asList(Usuario.ROLE_CLIENTE))
+         .roles(Arrays.asList(Autenticacao.ROLE_USUARIO))
          .build();
        }
    
