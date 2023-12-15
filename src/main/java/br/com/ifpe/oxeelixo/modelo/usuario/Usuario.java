@@ -2,17 +2,18 @@ package br.com.ifpe.oxeelixo.modelo.usuario;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import org.hibernate.annotations.Where;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.ifpe.oxeelixo.modelo.acesso.Autenticacao;
 import br.com.ifpe.oxeelixo.util.entity.EntidadeAuditavel;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -38,9 +39,6 @@ public class Usuario extends EntidadeAuditavel {
 
    @Column
    private String email;
-
-   @Column
-   private String senha;
 
    @Column
    @JsonFormat(pattern = "dd/MM/yyyy")

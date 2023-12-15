@@ -1,5 +1,7 @@
 package br.com.ifpe.oxeelixo.config;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,8 +19,6 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import br.com.ifpe.oxeelixo.modelo.acesso.Autenticacao;
-
-import static org.springframework.security.config.Customizer.withDefaults;
 import br.com.ifpe.oxeelixo.modelo.acesso.AutenticacaoService;
 import br.com.ifpe.oxeelixo.seguranca.jwt.JwtAuthenticationEntryPoint;
 import br.com.ifpe.oxeelixo.seguranca.jwt.JwtTokenAuthenticationFilter;
@@ -67,17 +67,17 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)).exceptionHandling(handling -> handling
                 .authenticationEntryPoint(authenticationEntryPoint)).authorizeHttpRequests(requests -> requests
 
-                .requestMatchers(AUTH_WHITELIST).permitAll()
+                .antMatchers(AUTH_WHITELIST).permitAll()
 
-                .requestMatchers(HttpMethod.POST, "/api/usuario").permitAll()
-                .requestMatchers(HttpMethod.POST, "/api/login").permitAll()
-                .requestMatchers(HttpMethod.POST, "/api/empresa").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/usuario").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/login").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/empresa").permitAll()
 
 
 
 
                 .anyRequest()
-                .hasAnyAuthority(Autenticacao.ROLE_USUARIO, Autenticacao.ROLE_EMPRESA, Autenticacao.ROLE_USUARIO)
+                .hasAnyAuthority(Autenticacao.ROLE_USUARIO, Autenticacao.ROLE_EMPRESA)
                 .and().addFilterBefore(
                 new JwtTokenAuthenticationFilter(jwtTokenProvider),
                 UsernamePasswordAuthenticationFilter.class));

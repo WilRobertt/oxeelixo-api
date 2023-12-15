@@ -3,11 +3,12 @@ package br.com.ifpe.oxeelixo.api.Usuario;
 import java.time.LocalDate;
 import java.util.Arrays;
 
+import javax.validation.constraints.NotBlank;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.ifpe.oxeelixo.modelo.acesso.Autenticacao;
 import br.com.ifpe.oxeelixo.modelo.usuario.Usuario;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,7 +27,6 @@ public class UsuarioRequest {
 
    private String email;
 
-   private String senha;
 
    @NotBlank(message = "A senha é de preenchimento obrigatório")
    private String password;
@@ -39,7 +39,6 @@ public class UsuarioRequest {
             .nome(nome)
             .dataNascimento(dataNascimento)
             .email(email)
-            .senha(senha)
             .build();
    }
    public Autenticacao buildAutenticacao() {

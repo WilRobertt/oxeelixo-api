@@ -2,6 +2,8 @@ package br.com.ifpe.oxeelixo.api.Empresa;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +22,6 @@ import br.com.ifpe.oxeelixo.modelo.empresa.EmpresaService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import jakarta.validation.Valid;
 
 
 @RestController

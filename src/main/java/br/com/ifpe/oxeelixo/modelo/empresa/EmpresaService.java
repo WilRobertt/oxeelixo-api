@@ -3,11 +3,12 @@ package br.com.ifpe.oxeelixo.modelo.empresa;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.ifpe.oxeelixo.modelo.acesso.AutenticacaoService;
-import jakarta.transaction.Transactional;
 
 @Service
 public class EmpresaService {

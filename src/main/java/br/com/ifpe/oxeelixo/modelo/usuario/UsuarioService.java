@@ -55,7 +55,6 @@ public class UsuarioService {
         Usuario usuario = repository.findById(id).get();
         usuario.setNome(usuarioAlterado.getNome());
         usuario.setDataNascimento(usuarioAlterado.getDataNascimento());
-        usuario.setSenha(usuarioAlterado.getSenha());
 
         usuario.setVersao(usuario.getVersao() + 1);
         repository.save(usuario);
